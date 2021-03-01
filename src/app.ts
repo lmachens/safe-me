@@ -1,10 +1,13 @@
-console.log("Welcome to Safe-Me 🔑");
+import prompts from "prompts";
 
-const [command] = process.argv.slice(2);
-// const [,,command] = process.argv;
+const run = async () => {
+  console.log("Welcome to Safe-Me 🔑");
 
-if (command === "set") {
-  console.log("You like to set something?");
-} else if (command === "get") {
-  console.log("What should I get?");
-}
+  const response = await prompts({
+    type: "text",
+    name: "value",
+    message: "Who are you?",
+  });
+};
+
+run();
