@@ -1,14 +1,25 @@
-import prompts from "prompts";
-import chalk from "chalk";
+import { printWelcomeMessage, printNoAccess } from "./messages";
+import { askForAction, askForCredentials } from "./questions";
+import { handleGetPassword, handleSetPassword, hasAccess } from "./commands";
 
 const run = async () => {
-  console.log(`Welcome to ${chalk.underline.green("Safe-Me")} 🔑`);
+  printWelcomeMessage();
+  const credentials = await askForCredentials();
+  if (!hasAccess(credentials.masterPassword)) {
+    printNoAccess();
+    run();
+    return;
+  }
 
-  const response = await prompts({
-    type: "text",
-    name: "value",
-    message: "Who are you?",
-  });
+  const action = await askForAction();
+  switch (action.command) {
+    case "set":
+      handleSetPassword(action.passwordName);
+      break;
+    case "get":
+      handleGetPassword(action.passwordName);
+      break;
+  }
 };
 
 run();
