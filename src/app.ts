@@ -3,8 +3,7 @@ import { askForAction, askForCredentials } from "./questions";
 import { handleGetPassword, handleSetPassword, hasAccess } from "./commands";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
-import { closeDB, connectDB, createPasswordDoc, readPasswordDoc } from "./db";
-import { listenerCount } from "events";
+import { closeDB, connectDB } from "./db";
 
 dotenv.config();
 
@@ -19,6 +18,7 @@ const commandToFunction: CommandToFunction = {
 
 const run = async () => {
   const url = process.env.MONGODB_URL;
+
   printWelcomeMessage();
 
   try {
@@ -33,7 +33,7 @@ const run = async () => {
 
     const action = await askForAction();
     const commandFunction = commandToFunction[action.command];
-    commandFunction(action.passwordName);
+    await commandFunction(action.passwordName);
 
     await closeDB();
   } catch (error) {
