@@ -2,6 +2,15 @@ import { printWelcomeMessage, printNoAccess } from "./messages";
 import { askForAction, askForCredentials } from "./questions";
 import { handleGetPassword, handleSetPassword, hasAccess } from "./commands";
 
+type CommandToFunction = {
+  set: (passwordName: string) => Promise<void>;
+  get: (passwordName: string) => Promise<void>;
+};
+const commandToFunction: CommandToFunction = {
+  set: handleSetPassword,
+  get: handleGetPassword,
+};
+
 const run = async () => {
   printWelcomeMessage();
   const credentials = await askForCredentials();
@@ -12,14 +21,8 @@ const run = async () => {
   }
 
   const action = await askForAction();
-  switch (action.command) {
-    case "set":
-      handleSetPassword(action.passwordName);
-      break;
-    case "get":
-      handleGetPassword(action.passwordName);
-      break;
-  }
+  const commandFunction = commandToFunction[action.command];
+  commandFunction(action.passwordName);
 };
 
 run();
