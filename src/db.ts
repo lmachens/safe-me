@@ -1,3 +1,5 @@
+import { handleGetPassword, handleSetPassword, hasAccess } from "./commands";
+import dotenv from "dotenv";
 import { Collection, Db, MongoClient } from "mongodb";
 
 let client: MongoClient = null;
@@ -29,4 +31,24 @@ export async function createPasswordDoc(passwordDoc: PasswordDoc) {
 export async function readPasswordDoc(passwordName: string) {
   const passwordCollection = await getCollection<PasswordDoc>("passwords");
   return await passwordCollection.findOne({ name: passwordName });
+}
+export async function updatePasswordValue(
+  passwordName: string,
+  newPasswordValue: string
+) {
+  const passwordCollection = await getCollection<PasswordDoc>("passwords");
+  return await passwordCollection.updateOne(
+    { name: passwordName },
+    { $set: { value: newPasswordValue } }
+  );
+}
+
+export async function deletePasswordDoc(
+  passwordName: string
+): Promise<Boolean> {
+  const passwordCollection = await getCollection<PasswordDoc>("passwords");
+  const deleteResult = await passwordCollection.deleteOne({
+    name: passwordName,
+  });
+  return deleteResult.deletedCount >= 1;
 }

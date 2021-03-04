@@ -12,9 +12,9 @@ const run = async () => {
   const url = process.env.MONGODB_URL;
 
   try {
-    await connectDB(url, "safe-me-philipp");
-    await createPasswordDoc({ name: "Leon", value: "1111" });
-    console.log(await readPasswordDoc("Leon"));
+    await connectDB(url, "PasswordManager-Fabian");
+    await createPasswordDoc({ name: "Fabian", value: "1111" });
+    console.log(await readPasswordDoc("Fabian"));
     await closeDB();
   } catch (error) {
     console.error(error);
