@@ -1,7 +1,7 @@
 import chalk from "chalk";
 
 export const printWelcomeMessage = () => {
-  console.log(`Welcome to ${chalk.underline.green("Safe-Me")} 🔑`);
+  console.log(`Welcome to ${chalk.bgBlue("PasswordManager")} 🔑`);
 };
 
 export const printNoAccess = () => {
