@@ -2,7 +2,7 @@ import { printPassword, printPasswordSet } from "./messages";
 import { askForPasswordValue } from "./questions";
 
 export const hasAccess = (masterPassword: string): boolean =>
-  masterPassword === "abc123";
+  masterPassword === "666";
 
 export const handleSetPassword = async (
   passwordName: string
@@ -15,5 +15,5 @@ export const handleSetPassword = async (
 export const handleGetPassword = async (
   passwordName: string
 ): Promise<void> => {
-  printPassword(passwordName, "XYZ123");
+  printPassword(passwordName, "adc666");
 };
