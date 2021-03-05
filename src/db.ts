@@ -61,7 +61,9 @@ export async function updatePasswordValue(
   passwordName: string,
   newPasswordValue: string
 ): Promise<Boolean> {
-  return await updatePasswordDoc(passwordName, { value: newPasswordValue });
+  return await updatePasswordDoc(passwordName, {
+    value: encryptPassword(newPasswordValue),
+  });
 }
 
 export async function deletePasswordDoc(
