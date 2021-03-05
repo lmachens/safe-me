@@ -1,4 +1,4 @@
-import { readPasswordDoc } from "./db";
+import { createPasswordDoc, readPasswordDoc } from "./db";
 import { printPassword, printPasswordSet } from "./messages";
 import { askForPasswordValue } from "./questions";
 
@@ -9,7 +9,7 @@ export const handleSetPassword = async (
   passwordName: string
 ): Promise<void> => {
   const passwordValue = await askForPasswordValue();
-  // ToDO use response.passwordValue to update password
+  await createPasswordDoc({ name: passwordName, value: passwordValue });
   printPasswordSet(passwordName);
 };
 
