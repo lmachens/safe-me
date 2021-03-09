@@ -1,4 +1,16 @@
 import { useState } from "react";
+import styled from "styled-components";
+
+const SubmitButton = styled.button`
+  color: red;
+`;
+
+const Container = styled.div`
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  place-items: center;
+`;
 
 export default function Home() {
   const [passwordName, setPasswordName] = useState("");
@@ -14,18 +26,20 @@ export default function Home() {
   }
   return (
     <>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          value={passwordName}
-          onChange={(event) => setPasswordName(event.target.value)}
-        />
-        <button type="submit">Senden</button>
-      </form>
-      {passwordDoc && (
-        <>
-          {passwordDoc.name} {passwordDoc.value}
-        </>
-      )}
+      <Container>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <input
+            value={passwordName}
+            onChange={(event) => setPasswordName(event.target.value)}
+          />
+          <SubmitButton type="submit">Senden</SubmitButton>
+        </form>
+        {passwordDoc && (
+          <>
+            {passwordDoc.name} {passwordDoc.value}
+          </>
+        )}
+      </Container>
     </>
   );
 }
