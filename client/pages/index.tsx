@@ -107,3 +107,30 @@ export default function Home() {
     </>
   );
 }
+
+//    function calcColor(length: number): string {
+//      if (length < 3) {
+//        return "7FFFD4";
+//      }
+//      return "F0F8FF";
+//      if (length < 6) {
+//        return "0000FF";
+//      }
+//      return "F0F8FF";
+//      if (length < 9) {
+//        return "00008B";
+//      }
+//      return "F0F8FF";
+//    }
+//
+
+// {
+//    const SafeInput = styled.input<Props>`
+//              background ${(props) => (props.value.length < 0 ? "F0F8FF" : "7FFFD4")}`;
+//              background ${(props) => (props.value.length < 3 ? "00FFFF" : "green")}`;
+//              background ${(props) => (props.value.length < 6 ? "008B8B" : "0000FF")}`;
+//              background ${(props) => (props.value.length < 9 ? "1E90FF" : "00008B")}`;
+//              background ${(props) => (props.value.length < 12 ? "483D8B" : "4B0082")}`
+//    const SafeInput = styled.input<Props>`
+//      background: ${(props) => calcColor(props.value.length)};
+//    `;
