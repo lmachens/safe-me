@@ -1,0 +1,15 @@
+### GET a password by name
+GET http://localhost:3333/api/passwords/BankAccount
+
+### DELETE an unknown password by name
+DELETE  http://localhost:3333/api/passwords/DebitCard
+
+
+### POST a new password
+POST http://localhost:3333/api/passwords
+Content-Type: application/json
+
+{
+    "name": "WiFi",
+    "value": "ninja-lazer-pw1337"
+}
