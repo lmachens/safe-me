@@ -33,6 +33,7 @@ const InputElement = styled.input`
     outline: none;
   }
   padding-left: 20px;
+  line-height: 2em;
 `;
 
 const ContainerElementPage = styled.div`
@@ -70,6 +71,11 @@ const PasswordSpan = styled.span`
 // ----------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------
+type Props = {
+  value: string;
+};
+
+const [secret, setSecret] = useState("");
 
 export default function Home() {
   const [passwordName, setPasswordName] = useState("");
@@ -83,54 +89,46 @@ export default function Home() {
     const passwordDoc = await result.json();
     setPasswordDoc(passwordDoc);
   }
+
+  function calcColor(length: number): string {
+    if (length < 3) return "#6495ED";
+    else if (length < 6) return "#1E90FF";
+    else if (length < 9) return "#0000FF";
+    else if (length < 12) return "#00008B";
+    return "F0F8FF";
+  }
+
+  const SafeInput = styled.input<Props>`
+    background: ${(props) => calcColor(props.value.length)};
+    border-radius: 20px;
+  `;
+  SafeInput;
+
   return (
-    <>
-      <ContainerElementPage>
-        <FormElement onSubmit={(e) => handleSubmit(e)}>
-          <InputElement
-            // type="password"
-            value={passwordName}
-            onChange={(event) => setPasswordName(event.target.value)}
-          />
-          <SubmitButton type="submit">
-            Send request for your password
-          </SubmitButton>
-        </FormElement>
-        {passwordDoc && (
-          <Outputcontainer>
-            The requested password for your{" "}
-            <UserNameSpan>{passwordDoc.name}</UserNameSpan> is:{" "}
-            <PasswordSpan>{passwordDoc.value}</PasswordSpan>
-          </Outputcontainer>
-        )}
-      </ContainerElementPage>
-    </>
+    <ContainerElementPage>
+      <FormElement onSubmit={(e) => handleSubmit(e)}>
+        <InputElement
+          // type="password"
+          value={passwordName}
+          onChange={(event) => setPasswordName(event.target.value)}
+        />
+        <SafeInput
+          value={secret}
+          onChange={(event) => setSecret(event.target.value)}
+          type="password"
+        />
+        <SubmitButton type="submit">
+          Send request for your password
+        </SubmitButton>
+      </FormElement>
+
+      {passwordDoc && (
+        <Outputcontainer>
+          The requested password for your{" "}
+          <UserNameSpan>{passwordDoc.name}</UserNameSpan> is:{" "}
+          <PasswordSpan>{passwordDoc.value}</PasswordSpan>
+        </Outputcontainer>
+      )}
+    </ContainerElementPage>
   );
 }
-
-//    function calcColor(length: number): string {
-//      if (length < 3) {
-//        return "7FFFD4";
-//      }
-//      return "F0F8FF";
-//      if (length < 6) {
-//        return "0000FF";
-//      }
-//      return "F0F8FF";
-//      if (length < 9) {
-//        return "00008B";
-//      }
-//      return "F0F8FF";
-//    }
-//
-
-// {
-//    const SafeInput = styled.input<Props>`
-//              background ${(props) => (props.value.length < 0 ? "F0F8FF" : "7FFFD4")}`;
-//              background ${(props) => (props.value.length < 3 ? "00FFFF" : "green")}`;
-//              background ${(props) => (props.value.length < 6 ? "008B8B" : "0000FF")}`;
-//              background ${(props) => (props.value.length < 9 ? "1E90FF" : "00008B")}`;
-//              background ${(props) => (props.value.length < 12 ? "483D8B" : "4B0082")}`
-//    const SafeInput = styled.input<Props>`
-//      background: ${(props) => calcColor(props.value.length)};
-//    `;
