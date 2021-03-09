@@ -7,7 +7,7 @@ export default function Home() {
   async function handleSubmit(event) {
     event.preventDefault();
     const result = await fetch(
-      `http://localhost:3000/api/passwords/${passwordName}`
+      `http://localhost:3333/api/passwords/${passwordName}`
     );
     const passwordDoc = await result.json();
     setPasswordDoc(passwordDoc);

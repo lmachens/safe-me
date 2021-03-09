@@ -10,6 +10,7 @@ const url = process.env.MONGODB_URL;
 connectDB(url, "PasswordManager-Fabian");
 
 const server = http.createServer(async (request, response) => {
+  response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   console.log("request");
   if (request.url === "/") {
     response.statusCode = 200;
