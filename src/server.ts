@@ -8,9 +8,11 @@ dotenv.config();
 const port = process.env.PORT;
 const url = process.env.MONGODB_URL;
 
-connectDB(url, "safe-me-philipp");
+connectDB(url, "safe-me-sascha");
 
 const server = http.createServer(async (request, response) => {
+  response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+
   if (request.url === "/") {
     response.statusCode = 200;
     response.setHeader("Content-Type", "text/html");

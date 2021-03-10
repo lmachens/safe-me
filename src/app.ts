@@ -29,7 +29,7 @@ const run = async () => {
       return;
     }
 
-    await connectDB(url, "safe-me-philipp");
+    await connectDB(url, "safe-me-sascha");
 
     const action = await askForAction();
     const commandFunction = commandToFunction[action.command];
